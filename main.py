@@ -6,14 +6,14 @@ import pyautogui
 import pyperclip
 
 class ShortLLM():
-    def __init__(self, shortcut: str = "ctrl+space", stop_shortcut: str = "ctrl", system: str = "Help the user with any task.", max_new_tokens: int = 512, temperature: int = 0.3):
+    def __init__(self, shortcut: str = 'ctrl+space', stop_shortcut: str = 'ctrl', system: str = "Help the user with any task.", max_new_tokens: int = 512, temperature: int = 0.3):
         self.shortcut = shortcut
         self.stop_shortcut = stop_shortcut
         self.system = system
         self.max_new_tokens = max_new_tokens
         self.temperature = temperature
-        if sys.platform.startswith("win"):
-            self.sys = "windows"
+        if sys.platform.startswith('win'):
+            self.sys = 'windows'
         else:
             raise ValueError(f"Operative System not compatible: {sys.platform}")
         self.inf = InferenceClient(model="mistralai/Mixtral-8x7B-Instruct-v0.1")
@@ -45,8 +45,8 @@ class ShortLLM():
                     break
                 if "\n" in token:
                     self.type_shift_enter()
-                    token = token.replace("\n","")
-                self.write(token.replace("</s>",""))
+                    token = token.replace('\n','')
+                self.write(token.replace('</s>',''))
             print("Finished.")
 
     def run(self):
