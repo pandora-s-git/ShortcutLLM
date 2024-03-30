@@ -1,1 +1,1 @@
-# shortllm
+# ShortcutLLM
