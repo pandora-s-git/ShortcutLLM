@@ -5,10 +5,12 @@ import pyautogui
 import pyperclip
 
 class ShortLLM():
-    def __init__(self, shortcut: str = "ctrl+space", stop_shortcut: str = "ctrl", system: str = "Help the user with any task."):
+    def __init__(self, shortcut: str = "ctrl+space", stop_shortcut: str = "ctrl", system: str = "Help the user with any task.", max_new_tokens: int = 512, temparature: int = 0.3):
         self.shortcut = shortcut
         self.stop_shortcut = stop_shortcut
         self.system = system
+        self.max_new_tokens = max_new_tokens
+        self.temperature = temparature
         self.inf = InferenceClient(model="mistralai/Mixtral-8x7B-Instruct-v0.1")
 
     def write(self, txt: str):
@@ -22,7 +24,7 @@ class ShortLLM():
         pyautogui.keyUp('shift')
 
     def ask_stream(self, txt: str):
-        return self.inf.text_generation("<s>[INST] {}\nThe user said:\n{} [/INST] ".format(self.system, txt), max_new_tokens=128, temperature=0.3, stream=True)
+        return self.inf.text_generation("<s>[INST] {}\nThe user said:\n{} [/INST] ".format(self.system, txt), max_new_tokens=self.max_new_tokens, temperature=self.temperature, stream=True)
 
     def on_release(self):
         time.sleep(1)
@@ -33,7 +35,7 @@ class ShortLLM():
             pyautogui.press('esc')
             pyautogui.hotkey('right')
             self.type_shift_enter()
-            for token in self.inf.text_generation("<s>[INST] Hi, help the user with this task:\n{} [/INST] ".format(selected_text), max_new_tokens=128, temperature=0.3, stream=True):
+            for token in self.ask_stream(selected_text):
                 if keyboard.is_pressed(self.stop_shortcut):
                     break
                 if "\n" in token:
