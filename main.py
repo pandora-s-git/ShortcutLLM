@@ -1,3 +1,4 @@
+import sys
 import time
 import keyboard
 from huggingface_hub import InferenceClient
@@ -11,6 +12,10 @@ class ShortLLM():
         self.system = system
         self.max_new_tokens = max_new_tokens
         self.temperature = temperature
+        if sys.platform.startswith("win"):
+            self.sys = "windows"
+        else:
+            raise ValueError(f"Operative System not compatible: {sys.platform}")
         self.inf = InferenceClient(model="mistralai/Mixtral-8x7B-Instruct-v0.1")
 
     def write(self, txt: str):
@@ -54,5 +59,6 @@ class ShortLLM():
                 break
         keyboard.remove_hotkey(self.on_release)
 
-short_like_me = ShortLLM()
-short_like_me.run()
+if __name__ == "__main__":
+    short_like_me = ShortLLM()
+    short_like_me.run()

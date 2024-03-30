@@ -14,7 +14,7 @@ This small project aims to enable conversations and LLM usage on any text editor
 
 | Operating System | Compatible |
 |------------------|------------|
-| Windows 10       | ✅         |
+| Windows 10/11    | ✅         |
 | macOS            | ❌         |
 | Linux            | ❌         |
 
