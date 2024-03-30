@@ -5,12 +5,12 @@ import pyautogui
 import pyperclip
 
 class ShortLLM():
-    def __init__(self, shortcut: str = "ctrl+space", stop_shortcut: str = "ctrl", system: str = "Help the user with any task.", max_new_tokens: int = 512, temparature: int = 0.3):
+    def __init__(self, shortcut: str = "ctrl+space", stop_shortcut: str = "ctrl", system: str = "Help the user with any task.", max_new_tokens: int = 512, temperature: int = 0.3):
         self.shortcut = shortcut
         self.stop_shortcut = stop_shortcut
         self.system = system
         self.max_new_tokens = max_new_tokens
-        self.temperature = temparature
+        self.temperature = temperature
         self.inf = InferenceClient(model="mistralai/Mixtral-8x7B-Instruct-v0.1")
 
     def write(self, txt: str):
