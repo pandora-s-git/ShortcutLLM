@@ -20,3 +20,6 @@ This small project aims to enable conversations and LLM usage on any text editor
 
 ✅ - Compatible  
 ❌ - Not Compatible
+
+## How to use
+It's pretty simple; you select a text in a text editor, for example, and then use the shortcut. It will copy that and start answering right there!
